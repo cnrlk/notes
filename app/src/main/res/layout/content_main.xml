@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_host_fragment"
-        android:name="com.caneru.notesjava.ui.features.list.ListFragment"
+        android:name="com.caneru.notesjava.ui.features.list.ListNotesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"

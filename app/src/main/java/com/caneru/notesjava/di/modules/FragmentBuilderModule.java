@@ -1,6 +1,6 @@
 package com.caneru.notesjava.di.modules;
 
-import com.caneru.notesjava.ui.features.list.ListFragment;
+import com.caneru.notesjava.ui.features.list.ListNotesFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,5 +9,5 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
-    abstract ListFragment contributesListFragment();
+    abstract ListNotesFragment contributesListFragment();
 }

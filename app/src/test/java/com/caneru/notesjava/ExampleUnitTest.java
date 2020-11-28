@@ -1,6 +1,14 @@
 package com.caneru.notesjava;
 
+import android.text.format.DateUtils;
+
+import com.caneru.notesjava.model.Note;
+import com.caneru.notesjava.service.LocalStore;
+import com.caneru.notesjava.service.SharedPrefsLocalStore;
+
 import org.junit.Test;
+
+import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
