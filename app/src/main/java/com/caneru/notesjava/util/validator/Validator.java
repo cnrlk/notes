@@ -10,7 +10,6 @@ import com.caneru.notesjava.util.validator.results.OKValidationResult;
 import com.caneru.notesjava.util.validator.results.PasswordValidationResult;
 import com.caneru.notesjava.util.validator.type.ValidationType;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;

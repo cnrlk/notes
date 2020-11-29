@@ -19,7 +19,6 @@ import com.caneru.notesjava.ui.base.BaseActivity;
 import com.caneru.notesjava.ui.base.BaseFragment;
 import com.caneru.notesjava.ui.features.create.CreateNoteFragment;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -51,6 +50,7 @@ public class ListNotesFragment extends BaseFragment implements NoteListAdapter.M
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((BaseActivity) getActivity()).toolbar.setTitle("Notes");
 
         viewModel.fetchNotes();
 

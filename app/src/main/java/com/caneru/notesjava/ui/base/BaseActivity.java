@@ -1,17 +1,16 @@
 package com.caneru.notesjava.ui.base;
 
-import android.app.Fragment;
-
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.caneru.notesjava.R;
-import com.caneru.notesjava.ui.features.list.ListNotesFragment;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class BaseActivity extends DaggerAppCompatActivity {
+
+    public Toolbar toolbar;
 
     private final String LIST_FRAGMENT_TAG = "LIST_FRAGMENT_TAG";
     private final String CREATE_FRAGMENT_TAG = "CREATE_FRAGMENT_TAG";

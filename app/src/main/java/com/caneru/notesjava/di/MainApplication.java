@@ -1,7 +1,5 @@
 package com.caneru.notesjava.di;
 
-import android.app.Application;
-
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 

@@ -10,17 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.caneru.notesjava.R;
-import com.caneru.notesjava.databinding.FragmentCreateBinding;
 import com.caneru.notesjava.databinding.FragmentCreateBindingImpl;
 import com.caneru.notesjava.model.Note;
+import com.caneru.notesjava.ui.base.BaseActivity;
 import com.caneru.notesjava.ui.base.BaseFragment;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Observable;
 
 import javax.inject.Inject;
 
@@ -35,7 +33,7 @@ public class CreateNoteFragment extends BaseFragment {
     public static final int CREATE_MODE = 0;
     public static final int EDIT_MODE = 1;
 
-    private int mode;
+    private int mode = CREATE_MODE;
     private int position;
     private Note note;
 
@@ -57,7 +55,10 @@ public class CreateNoteFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false);
 
+        ((BaseActivity) getActivity()).toolbar.setTitle("Create Note");
+
         if (mode == EDIT_MODE) {
+            ((BaseActivity) getActivity()).toolbar.setTitle("Edit Notes");
             binding.etTitle.setText(note.getTitle());
             binding.etDescription.setText(note.getDescription());
             binding.etImage.setText(note.getImage());

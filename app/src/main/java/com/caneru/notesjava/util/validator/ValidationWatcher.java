@@ -7,7 +7,6 @@ import android.widget.EditText;
 import com.caneru.notesjava.util.validator.listener.ValidationListener;
 import com.caneru.notesjava.util.validator.results.EmptyValidationResult;
 import com.caneru.notesjava.util.validator.results.OKValidationResult;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ValidationWatcher implements TextWatcher {

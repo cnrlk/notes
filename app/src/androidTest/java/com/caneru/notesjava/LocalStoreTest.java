@@ -79,4 +79,37 @@ public class LocalStoreTest  {
         }
     }
 
+    @Test
+    public void deleteNote() {
+        SharedPreferences preferences = ApplicationProvider.getApplicationContext()
+                .getSharedPreferences("notes", Context.MODE_PRIVATE);
+
+        LocalStore localStore = new SharedPrefsLocalStore(preferences);
+
+        Gson converter = new Gson();
+
+        String notesString = preferences.getString("ALL_NOTES", null);
+        if (notesString == null) {
+            fail();
+        }
+        Type type = new TypeToken < ArrayList<Note> >(){}.getType();
+        ArrayList<Note> list = converter.fromJson(notesString, type);
+
+        Note note = list.get(0);
+
+        localStore.deleteNote(0);
+
+        notesString = preferences.getString("ALL_NOTES", null);
+        if (notesString == null) {
+            assertTrue(true);
+        }
+        list = converter.fromJson(notesString, type);
+        if (list.contains(note)) {
+            fail();
+        }
+
+        assertTrue(true);
+
+    }
+
 }

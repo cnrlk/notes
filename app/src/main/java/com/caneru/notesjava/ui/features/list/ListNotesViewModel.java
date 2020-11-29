@@ -1,24 +1,25 @@
 package com.caneru.notesjava.ui.features.list;
 
+import android.app.Application;
+
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.caneru.notesjava.model.Note;
 import com.caneru.notesjava.service.LocalStore;
-
+import com.caneru.notesjava.ui.base.BaseViewModel;
 import java.util.ArrayList;
-
 import javax.inject.Inject;
 
-public class ListNotesViewModel extends ViewModel {
+public class ListNotesViewModel extends BaseViewModel {
 
+    @Inject
     public LocalStore localStore;
 
     private MutableLiveData<ArrayList<Note>> notes;
 
     @Inject
-    public ListNotesViewModel(LocalStore localStore) {
-        this.localStore = localStore;
+    public ListNotesViewModel(Application application) {
+        super(application);
         notes = new MutableLiveData<>();
     }
 

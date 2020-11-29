@@ -1,11 +1,7 @@
 package com.caneru.notesjava.di;
-
-
 import android.app.Application;
-
 import com.caneru.notesjava.di.modules.ActivityBuilderModule;
 import com.caneru.notesjava.di.modules.ViewModelModule;
-
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
