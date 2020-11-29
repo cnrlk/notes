@@ -43,4 +43,20 @@ public class SharedPrefsLocalStore implements LocalStore {
         notes.add(note);
         preferences.edit().putString(ALL_NOTES, gsonConverter.toJson(notes)).apply();
     }
+
+    @Override
+    public void deleteNote(int position) {
+        ArrayList<Note> notes = getAllNotes();
+        notes.remove(position);
+        preferences.edit().putString(ALL_NOTES, gsonConverter.toJson(notes)).apply();
+
+    }
+
+    @Override
+    public void editNote(Note note, int position) {
+        ArrayList<Note> notes = getAllNotes();
+        notes.remove(position);
+        notes.add(position, note);
+        preferences.edit().putString(ALL_NOTES, gsonConverter.toJson(notes)).apply();
+    }
 }

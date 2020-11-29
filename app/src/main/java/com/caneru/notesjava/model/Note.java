@@ -2,6 +2,9 @@ package com.caneru.notesjava.model;
 
 import androidx.annotation.Nullable;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Note {
 
     private String title;
@@ -9,6 +12,8 @@ public class Note {
     private String image;
     private String createDate;
     private String editDate;
+
+    public Note(){}
 
     public Note(String title, String description, String url, String createDate, String editDate) {
         this.title = title;

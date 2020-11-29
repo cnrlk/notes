@@ -11,4 +11,7 @@ public interface LocalStore {
 
     public void addNote(Note note);
 
+    void deleteNote(int position);
+
+    public void editNote(Note note, int position);
 }

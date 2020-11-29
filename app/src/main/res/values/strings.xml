@@ -11,4 +11,12 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="dummy_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="notes_empty_list">Notunuz Bulunmamaktadır</string>
+    <string name="edittext_hint_title">Enter Title</string>
+    <string name="edittext_hint_description">Enter Description</string>
+    <string name="edittext_hint_image">Enter Image URL</string>
+    <string name="button_save_note">Save Note</string>
+    <string name="fab_content_desc">Add new note</string>
+    <string name="create_note_title">Title</string>
+    <string name="create_note_description">Description</string>
+    <string name="create_image_url">Image URL</string>
 </resources>

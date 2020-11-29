@@ -8,31 +8,31 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.caneru.notesjava.R;
 import com.caneru.notesjava.model.Note;
 import com.caneru.notesjava.service.LocalStore;
 import com.caneru.notesjava.databinding.FragmentListBindingImpl;
-import com.caneru.notesjava.di.DaggerAppComponent;
-import com.caneru.notesjava.di.MainApplication;
+import com.caneru.notesjava.ui.base.BaseActivity;
 import com.caneru.notesjava.ui.base.BaseFragment;
-import com.caneru.notesjava.util.ViewModelFactory;
+import com.caneru.notesjava.ui.features.create.CreateNoteFragment;
 
-import java.util.Calendar;
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 
-public class ListNotesFragment extends BaseFragment {
+public class ListNotesFragment extends BaseFragment implements NoteListAdapter.MenuClickListeners {
 
     FragmentListBindingImpl binding;
-    ListNotesViewModel viewModel;
 
     @Inject
-    ViewModelFactory viewModelFactory;
-
+    ListNotesViewModel viewModel;
 
     @Inject
     public LocalStore localStore;
@@ -42,9 +42,8 @@ public class ListNotesFragment extends BaseFragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false);
-        viewModel = new ViewModelProvider(this, viewModelFactory).get(ListNotesViewModel.class);
+        //viewModel = new ViewModelProvider(this, viewModelFactory).get(ListNotesViewModel.class);
 
         return binding.getRoot();
     }
@@ -53,16 +52,51 @@ public class ListNotesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DaggerAppComponent.builder().application(getActivity().getApplication()).build().inject((MainApplication) getActivity().getApplication());
-
-        Note dummyNote = new Note("Title", "description asfjgsfga",
-                null, Calendar.getInstance().getTime().toString(), null);
-
-        viewModel.createNote(dummyNote);
         viewModel.fetchNotes();
 
-        NoteListAdapter adapter = new NoteListAdapter(viewModel.getNotes());
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // replace note list fragment with create note fragment
+                ((BaseActivity) ListNotesFragment.super.getActivity()).replaceFragment(new CreateNoteFragment());
+            }
+        });
+
+        NoteListAdapter adapter = new NoteListAdapter(viewModel.getNotesData(), this);
         binding.rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvList.setAdapter(adapter);
+
+        viewModel.getNotes().observe(getViewLifecycleOwner(), new Observer<ArrayList<Note>>() {
+            @Override
+            public void onChanged(ArrayList<Note> notes) {
+                adapter.setNotes(notes);
+                adapter.notifyDataSetChanged();
+                if (notes == null || notes.size() == 0) {
+                    binding.tvEmptyInfo.setVisibility(View.VISIBLE);
+                    binding.rvList.setVisibility(View.GONE);
+                } else {
+                    binding.tvEmptyInfo.setVisibility(View.GONE);
+                    binding.rvList.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void editClickListener(Note note, int position) {
+        CreateNoteFragment fragment = new CreateNoteFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("MODE", CreateNoteFragment.EDIT_MODE);
+        bundle.putInt("POSITION", position);
+        bundle.putParcelable("NOTE", Parcels.wrap(note));
+        fragment.setArguments(bundle);
+        ((BaseActivity) ListNotesFragment.super.getActivity()).replaceFragment(fragment);
+    }
+
+    @Override
+    public void deleteClickListener(int position) {
+        viewModel.deleteNote(position);
+        viewModel.fetchNotes();
     }
 }
