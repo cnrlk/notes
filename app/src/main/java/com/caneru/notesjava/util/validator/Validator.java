@@ -147,4 +147,12 @@ public class Validator {
         listeners.add(listener);
     }
 
+    public static void removeValidator(EditText editText) {
+        for (Validator validator : validators) {
+            if (validator.validatorId == editText.getId()) {
+                validators.remove(validator);
+            }
+        }
+    }
+
 }

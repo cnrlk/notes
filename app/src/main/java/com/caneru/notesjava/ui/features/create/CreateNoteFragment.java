@@ -23,6 +23,7 @@ import java.util.Calendar;
 import javax.inject.Inject;
 
 import static com.caneru.notesjava.util.validator.Validator.isValid;
+import static com.caneru.notesjava.util.validator.Validator.removeValidator;
 
 public class CreateNoteFragment extends BaseFragment {
 
@@ -93,4 +94,10 @@ public class CreateNoteFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        removeValidator(binding.etTitle);
+        removeValidator(binding.etDescription);
+    }
 }
